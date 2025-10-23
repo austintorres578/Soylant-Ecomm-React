@@ -1,0 +1,25 @@
+.color-col-row{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    height: 50px;
+}
+
+.color-col-row .red{
+    background-color: #f8485e;
+}
+
+.color-col-row .yellow{
+    background-color: #eed484;
+}
+
+.color-col-row .brown{
+    background-color: #623b2a;
+}
+
+.color-col-row .mint{
+    background-color: #ade8bf;
+}
+
+.color-col-row .blue{
+    background-color: #5e93db;
+}

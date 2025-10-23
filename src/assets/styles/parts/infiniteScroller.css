@@ -1,0 +1,25 @@
+.infinite-auto-slider {
+    background-color: black;
+    color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .infinite-auto-slider .marquee {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden;
+  }
+  
+  .infinite-auto-slider span {
+    margin-right: 30px;
+    margin-left: 30px;
+    white-space: nowrap;
+  }
+  

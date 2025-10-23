@@ -1,0 +1,54 @@
+@media(max-width:945px){
+    body .hacked-food-grid{
+        grid-template-columns: 50% 50%;
+    }
+}
+
+.hacked-food-grid{
+    display:grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+}
+
+.hacked-food-wrapper{
+    max-width: 1325px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hacked-food-block div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hacked-food-block div p{
+    text-align: left;
+    width: 100%;
+}
+
+.hacked-food-block img{
+    height: 75px;
+    width: auto;
+    margin: 15px;
+}
+
+.hacked-food-block{
+    display:flex;
+    align-items: start;
+    margin: 25px 10px;
+}
+
+.hacked-food-con h1{
+    font-size: 32px;
+    margin-bottom: 0px;
+}
+
+.hacked-title{
+    margin-bottom: 0px;
+}
+
+.hacked-title-sub{
+    margin-bottom: 0px;
+    margin-top: 5px;
+    font-style: italic;
+}

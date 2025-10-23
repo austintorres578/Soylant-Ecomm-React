@@ -1,0 +1,231 @@
+@media(max-width:1200px){
+
+    body .science-articles{
+        width: 725px;
+    }
+
+    body .science-articles .science-wrapper{
+        width: 725px;
+    }
+
+    body .science-article{
+        min-width: 290px;
+    }
+
+    body .science-articles-meter-con{
+        width: 725px;
+    }
+
+    body .science-articles-meter{
+        width: 80%;
+    }
+
+    body .science-articles-meter-buttons{
+        width: 20%;
+    }
+    body .science-articles-con h1{
+        width: auto;
+        text-align: center;
+    }
+
+}
+
+@media(max-width:855px){
+    body .science-articles .science-wrapper{
+        width: 350px;
+    }
+
+    body .science-articles{
+        width: 350px;
+    }
+
+    body .science-articles-meter-con {
+        width: 350px;
+        display: none;
+    }
+    body .science-articles-con h1{
+        width: auto;
+        text-align: center;
+    }
+
+    body .science-articles-con{
+        padding: 50px 0px 50px 0px;
+    }
+    body .science-articles-mobile-count{
+        display: flex;
+    }
+}
+
+.science-articles-con{
+    background-color: #212322;
+    padding: 50px 75px 50px 75px;
+    overflow: hidden;
+}
+
+.science-articles-con h1{
+    text-align: left;
+    margin-top: 0px;
+}
+
+.science-articles-con h1{
+    color: white;
+    width: 1045px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.science-articles{
+      overflow: hidden;
+      width: 1035px;
+      margin-left: auto;
+      margin-right: auto;
+}
+
+.science-articles .science-wrapper{
+    display: flex;
+    align-items: center;
+    width: 1035px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    transition: .5s;
+}
+
+.science-article{
+    border: solid 1px black;
+    background-color: white;
+    min-width:450px;
+    margin-right: 18px;
+    text-align: left;
+    padding: 30px;
+    display: grid;
+    grid-template-rows: 25% 50% 25%;
+    height: 320px;
+}
+
+.science-article img{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    height: 50px;
+    width: auto;
+}
+
+.science-article-logo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: solid 1px lightgray;
+}
+
+.science-article-link{
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+}
+
+.science-article-link a{
+    color: green;
+}
+
+.science-articles-meter-con{
+    display: flex;
+    align-items: center;
+    width: 1035px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.science-articles-meter{
+    width: 90%;
+    height: 1px;
+    border-radius: 20px;
+    background-color: #e7e7e7;
+    position: relative;
+}
+
+.science-articles-meter > div{
+    width: 33.3%;
+    background-color: green;
+    height: 100%;
+    position: absolute;
+    transition: .5s
+}
+
+.science-articles-meter-buttons{
+    display: flex;
+    justify-content: center;
+    width: 10%;
+}
+.science-articles-meter-buttons button{
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+    line-height: 1px;
+}
+
+.science-articles-meter-buttons button img{
+    height: 15px;
+    width: auto;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.science-articles-mobile-count button{
+    line-height: 1px;
+}
+
+.science-articles-mobile-count button img{
+    pointer-events: none;
+    height: 15px;
+    width: auto;
+    object-fit: contain;
+}
+
+.science-articles-mobile-count .left{
+    transform: rotate(-180deg);
+}
+
+.science-articles-meter-buttons .left{
+    transform: rotate(-180deg);
+}
+
+.science-articles-mobile-count{
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+
+
+.science-articles-mobile-count button{
+    font-size: 30px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.science-articles-mobile-count > div{
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.science-articles-mobile-count > div p{
+    font-size: 22px;
+}
+
+.current-count{
+    display: flex;
+}
+
+.current-count:after{
+    content:'/'
+}

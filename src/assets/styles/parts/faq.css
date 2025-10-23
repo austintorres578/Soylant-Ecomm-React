@@ -1,0 +1,84 @@
+@media(max-width:635px){
+    body .hacked-food-grid{
+        display: flex;
+        overflow: scroll;
+    }
+    body .hacked-food-block div{
+        width: 300px;
+    }
+
+}
+
+.faq-con{
+    margin-bottom: 100px;
+}
+
+.faq-con h1{
+    margin-bottom: 30px;
+}
+
+.faq-con .faq-wrapper h1{
+    text-align: left;
+    width: 100%;
+}
+
+.faq-wrapper{
+    max-width: 1325px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.faq-question-con{
+    cursor: pointer;;
+}
+
+.faq-question-con p{
+    text-align: left;
+}
+
+.faq-question{
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: block;
+    margin-bottom: 20px;
+    transition: .5s;
+}
+
+.faq-question-text button img{
+    height: 30px;
+    width: auto;
+}
+
+.faq-question-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.faq-question div{
+    pointer-events: none;
+}
+
+.faq-question button{
+    transform: rotate(90deg);
+    transition: .25s;
+    border: none;
+    background: none;
+}
+
+.faq-answer p{
+    line-height: 0%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    opacity: 0;
+    transition: .5s;
+}
+
+.faq-answer p a{
+    color: black;
+}
+

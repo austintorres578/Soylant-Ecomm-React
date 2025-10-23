@@ -1,0 +1,384 @@
+@media(max-width:600px){
+    body .shop-ham-flex{
+        flex-wrap: wrap;
+    }
+    body .shop-ham-block{
+        width: 100%;
+    }
+}
+
+@media(max-width:530px){
+    body .ham-about-grid a{
+        height: 320px;
+    }
+
+    body .ham-about-content .ham-about-grid a img {
+        height: 190px;
+    }
+
+    body #ham-about-flex a div {
+        padding: 5px;
+    }
+
+    body .ham-about-content .ham-about-grid div{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5px;
+        height: 37%;
+    }
+
+    
+
+}
+
+@media(max-width:400px){
+    body .shop-ham-block{
+        width: auto;
+    }
+    body .ham-about-content .ham-about-grid strong{
+        display:block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 95px;
+    }
+
+    body .ham-about-content .ham-about-grid a img{
+        height:165px
+    }
+
+        body .ham-about-grid a {
+            height: 295px;
+        }
+}
+
+.ham-menu{
+    background-color: white;
+}
+
+.ham-menu .ham-drop{
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: hidden;
+    height: 83.5px;
+}
+
+.ham-menu .ham-drop .ham-drop-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: none;
+}
+.ham-menu .ham-drop .ham-drop-title p{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.ham-menu .ham-drop h3{
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.ham-menu .ham-drop {
+    border-bottom: solid 1px lightgray;
+}
+
+.ham-menu .ham-link{
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: block;
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    border-bottom: solid 1px lightgray;
+}
+
+.ham-menu .ham-link .ham-link-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ham-menu .ham-link .ham-link-title h3{
+    font-weight: 600;
+}
+
+.ham-menu .ham-link .ham-link-title p{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* .shop-ham-drop{
+    display: flex;
+    justify-content: space-between;
+} */
+
+.shop-ham-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shop-ham-product{
+    border: solid 1px black;
+    height: 115px;
+    width: 115px;
+    min-width: 115px;
+}
+
+.shop-ham-block{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-bottom: 20px;
+    width: 390px;
+    position: relative;
+}
+
+.shop-ham-block img{
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: relative;
+}
+
+.shop-ham-block-text{
+    padding: 10px;
+}
+
+.shop-ham-block-text p{
+    text-align: left;
+}
+.shop-ham-block-title{
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    color:black
+}
+
+.shop-ham-block-text-gray{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #474747;
+}
+
+.shop-ham-block-green{
+    color: green;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.shop-ham-block .shop-ham-product{
+    position: relative;
+}
+
+.shop-ham-block .blue:after{
+    content: '';
+    width: 100%;
+    display: block;
+    height: 50%;
+    background-color: #5e93db;
+    position: absolute;
+    top: 0%;
+    z-index: 1;
+}
+
+.shop-ham-block .green:after{
+    content: '';
+    width: 100%;
+    display: block;
+    height: 50%;
+    background-color: #8fad15;
+    position: absolute;
+    top: 0%;
+    z-index: 1;
+}
+
+.shop-ham-block .yellow:after{
+    content: '';
+    width: 100%;
+    display: block;
+    height: 50%;
+    background-color: #f2ed6d;
+    position: absolute;
+    top: 0%;
+    z-index: 1;
+}
+
+.shop-ham-block .brown:after{
+    content: '';
+    width: 100%;
+    display: block;
+    height: 50%;
+    background-color: #c6893f;
+    position: absolute;
+    top: 0%;
+    z-index: 1;
+}
+
+.shop-ham-block .orange:after{
+    content: '';
+    width: 100%;
+    display: block;
+    height: 50%;
+    background-color: #fcd700;
+    position: absolute;
+    top: 0%;
+    z-index: 1;
+}
+
+.shop-ham-product-links{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-top: solid 1px lightgray;
+    padding-top: 20px;
+}
+
+.shop-ham-product-links a{
+    text-align: left;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-size: 18px;
+    transition: .5s;
+}
+
+.shop-ham-product-links a:hover{
+    color: green;
+}
+
+.health-ham-title{
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.green-title{
+    border-bottom: solid 3px #ade8bf;
+}
+
+.blue-title{
+    border-bottom: solid 3px #5e93db;
+}
+
+.red-title{
+    border-bottom: solid 3px red;
+}
+
+.yellow-title{
+    border-bottom: solid 3px #fcd700;
+}
+
+.ham-health-block .health-button-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.ham-health-block .health-button-col a{
+    margin-bottom: 15px;
+    width: 100%;
+    color: black;
+}
+
+.ham-health-block .health-button-col a button{
+    width: 100%;
+    background: white;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+    color: black;
+}
+
+.ham-health-block .health-button-col a button:hover{
+    color: green;
+}
+
+.health-title{
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.health-text{
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.ham-about-content .ham-about-grid{
+    display: grid;
+    grid-template-columns: 49% 49%;
+    grid-gap: 2%;
+    height: 50%;
+}
+
+
+
+.ham-about-content .ham-about-grid div{
+    height: 30%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.ham-about-content .ham-about-grid strong{
+    color: black;
+}
+
+.ham-about-content div{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 30%;
+}
+
+.ham-about-content a{
+    text-decoration: none;
+    box-shadow: 0px 0px 10px gray;
+}
+
+.ham-about-content a p{
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.ham-about-content .ham-about-grid a img{
+    width: 100%; 
+    display: block;
+    height: 70%;
+    object-fit: cover;
+}
+
+#ham-about-flex a{
+    display: flex;
+    align-items: center;
+    height: 50%;
+}
+
+#ham-about-flex a img{
+    height: 100%;
+    width: 50%;
+}
+
+#ham-about-flex a div{
+    width: 50%;
+}
+
+#ham-about-flex a div p{
+   height: 100%;
+   width: 100%;
+}
+
+#ham-about-flex a div p strong{
+    color: black;
+}
+
+.ham-about-text{
+    color:#474747
+}

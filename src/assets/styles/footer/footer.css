@@ -1,0 +1,153 @@
+@media(max-width:765px){
+    body .bottom-footer{
+        display: flex;
+        flex-direction: column;
+    }
+
+    body .bottom-footer > a{
+        margin-bottom: 30px;
+    }
+    body .bottom-footer > div{
+        margin-bottom: 30px;
+    }
+
+    body .bottom-footer > p{
+        text-align: left;
+        margin: 0px;
+    }
+}
+
+footer{
+    padding: 0px 50px 0px 50px;
+    background-color: #221f20;
+}
+
+footer .top-footer{
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 30px 0px 0px 0px;
+}
+
+.top-footer{
+    border-bottom: solid 1px #595758;
+}
+
+footer .top-footer div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+footer .top-footer div p{
+    text-align: left;
+    font-weight: bold;
+    margin-top: 0px;
+    color: white;
+}
+
+footer .top-footer div a{
+    text-align: left;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+
+footer .top-footer form{
+    display: flex;
+    flex-direction: column;
+    max-width: 322px;
+}
+
+footer .top-footer label{
+    text-align: left;
+    margin-bottom: 10px;
+    color:white;
+    font-weight: bold;
+}
+
+footer .top-footer form div{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+}
+
+footer .top-footer form div input{
+    width: 100%;
+    padding: 10px 5px 10px 5px;
+    background-color: #221f20;
+    border: solid 1px #595758;
+    height: 33px;
+    color: white;
+}
+
+footer .top-footer form button{
+    position: absolute;
+    right: 5px;
+    height: 38px;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.top-footer .footer-socials div{
+    display: flex;
+    align-items: start;
+    flex-direction: row;
+}
+
+.footer-socials div a{
+    margin-right: 10px;
+}
+
+.footer-socials div img{
+    height: 15px;
+    width: auto;
+}
+
+.bottom-footer{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    padding: 30px 0px 30px 0px;
+}
+.bottom-footer div{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bottom-footer div a{
+    margin: 0px 10px 3px 1px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    text-align: left;
+}
+
+.bottom-footer-logo{
+    width: fit-content;
+    height: fit-content;
+    margin:auto 0px auto 0px;
+}
+
+.bottom-footer-logo img{
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    object-position: center;
+}
+
+.bottom-footer p{
+    margin: auto;
+    color: white;
+    font-size: 13px;
+    text-align: left;
+}
+
+.bottom-footer p strong{
+    color: #9f9f9f;
+    font-weight: 400;
+}

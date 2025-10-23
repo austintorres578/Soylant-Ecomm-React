@@ -1,0 +1,216 @@
+@media(max-width:765px){
+    body .complete-slider-block{
+        height: 100%;
+        width: 300px;
+    }
+    body .complete-slider-content{
+        height: auto;
+        min-height: 175px;
+    }
+
+
+}
+
+@media(max-width:700px){
+    body .complete-sliders{
+        width: 335px;
+        overflow: hidden;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    body .complete-slider-mobile-buttons{
+        display: flex;
+    }
+
+    body .complete-slider-nav{
+        display: none;
+    }
+}
+
+.complete-sliders .complete-slider-wrapper{
+    display: flex;
+    padding: 20px;
+    position: relative;
+    transition: .5s;
+}
+.complete-slider-con{
+    overflow: hidden;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.complete-slider-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 359px;
+    height: 538px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0px 0px 5px gray;
+    margin-right: 25px;
+}
+
+.complete-slider-desc{
+    font-size: 18px;
+    font-weight: 600;
+    height: 72px;
+}
+
+.reviews-con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reviews-con p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: 400;
+}
+
+.review-stars{
+    display: flex;
+}
+.review-stars img{
+    height: 15px;
+    width: auto;
+    object-fit: contain;
+}
+
+.complete-slider-content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.complete-slider-content button{
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #221f20;
+    font-weight: bold;
+    font-size: 16px;
+    border: solid 1.5px #221f20;
+    transition: .5s;
+    cursor: pointer;
+    color: white;
+}
+
+.complete-slider-content button:hover{
+    border: solid 1.5px #221f20;
+    background-color: white;
+    color: #221f20;
+}
+
+.complete-slider-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.complete-slider-line-con{
+    width: 85%;
+    background-color: #d2d2d2;
+    height: 2px;
+}
+
+.complete-slider-line-con div{
+    background-color: black;
+    height: 100%;
+    transition: .5s;
+}
+
+.complete-slider-buttons{
+    display: flex;
+    justify-content: center;
+    width: 15%;
+}
+
+.complete-slider-buttons button{
+    border: none;
+    background-color: white;
+    font-size: 30px;
+    line-height: 35px;
+    cursor: pointer;
+    line-height: 0px;
+}
+
+.complete-slider-buttons button img{
+    height: 15px;
+    width: 25px;
+    object-fit: contain;
+    pointer-events: none;
+    
+}
+
+.slide-left{
+    transform: rotate(-180deg);
+}
+
+.complete-slider-block-quiz{
+    width: 359px;
+    padding: 20px;
+    background: url(../../images/home/home-hero/cropped-person-holding-drink.webp);
+    background-size: cover;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0px 0px 10px gray;
+}
+
+.complete-slider-block-quiz .complete-slider-quiz-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    height: 100%;
+}
+
+.complete-slider-block-quiz .complete-slider-quiz-content button{
+    background: #221f20;
+    color: white;
+    border: solid 1px #221f20;
+    padding: 15px 0px 15px 0px;
+    font-size: 16px;
+    border: solid 1px white;
+    font-weight: bold;
+    transition: .5s;
+}
+
+.complete-slider-block-quiz .complete-slider-quiz-content button:hover{
+    background-color: white;
+    color: black;
+    border: solid 1px black;
+}
+
+.complete-slider-mobile-buttons{
+    display:none;
+    align-items: center;
+    justify-content: center;
+}
+
+.complete-slider-mobile-buttons div{
+    display: flex;
+    align-items: center;
+}
+
+.complete-slider-mobile-buttons button{
+    line-height: 1px;
+    background-color: transparent;
+    border: none;
+}
+
+.complete-slider-mobile-buttons img{
+    height: 15px;
+    width: 25px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.current-amount:after{
+    content:'/'
+}

@@ -1,0 +1,453 @@
+@media(max-width:1040px){
+    body .product-items{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body .product-item{
+        width: 335px;
+    }
+}
+
+@media(max-width:1000px){
+    body .all-products-categories{
+        padding-top: 100px;
+    }
+}
+
+@media(max-width:765px){
+    body .product-items{
+        grid-template-columns: 100%;
+    }
+
+    body .all-product-inputs div select{
+        font-size: 14px;
+    }
+    body .all-product-inputs div p{
+        font-size: 14px;
+    }
+}
+
+.all-product-items-wrapper{
+    max-width: 1325px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.all-product-inputs{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.all-product-inputs div{
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.all-product-inputs div p{
+    margin-right: 10px;
+    font-size: 18px;
+    width:68px
+}
+
+.all-product-inputs div select{
+    border: none;
+    font-size: 18px ;
+    font-weight: bold;
+    cursor: pointer;
+    width: 150px;
+    background-color: white;
+    color: black;
+}
+
+.product-items{
+    border-top: solid 1px lightgray;
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-gap: 0px;
+    padding-top: 20px;
+}
+
+.product-item{
+    border: solid 1px black;
+    width: 95%;
+    margin: 25px 15px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.alternate-product-img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.product-img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.product-images{
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.product-images:hover:before{
+    opacity: 0;
+}
+
+.product-images:hover .product-img{
+    opacity: 0;
+}
+
+.product-images:before{
+    content:"";
+    background-color:#f6f6f6;
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    z-index: 2;
+}
+
+.product-tag{
+    z-index: 3;
+    position: relative;
+    background-color: #47af19;
+    width: 100%;
+    height: 30px;
+}
+.product-tag p{
+    background-color: #47af19;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    top:0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.product-images{
+    background-color: #f6f6f6;
+}
+
+.product-title-con{
+    position: relative;
+    z-index: 4;
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px lightgray;
+}
+.product-title{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.product-title-con div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-title-con div img{
+    height: 15px;
+    width: auto;
+    object-fit: contain;
+}
+
+
+.product-title-con div div p{
+    margin-left: 3px;
+}
+
+.product-price{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-weight: bold;
+}
+
+.add-to-cart{
+    width:100%;
+    padding-top:15px;
+    padding-bottom:15px;
+    color: white;
+    font-weight: bold;
+    /* background-color: #47af19;
+    border: solid 1px #47af19; */
+    cursor: pointer;
+}
+
+.radio-inputs div{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.radio-inputs div p{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.radio-inputs div p:first-of-type{
+    font-weight: bold;
+}
+
+.radio-price{
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.product-add-buttons{
+    display: flex;
+    align-items: center;
+    height: 55.5px;
+}
+
+.subscription-buttons{
+    grid-template-columns:50% 50%;
+    grid-gap: 0px;
+}
+
+.subscription-buttons select{
+    border: solid 1px black;
+    background-color: white;
+    border-radius: 0px;
+}
+
+.subscribe-quantity div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 1px #47af19;
+}
+
+.subscribe-quantity{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    background-color: #47af19;
+    border: solid 1px #47af19;
+    height: 100%;
+}
+
+.subscribe-quantity:hover{
+    background: white;
+    border: solid 1px black;
+}
+
+.subscribe-quantity:hover div{
+    border: solid 1px black;
+}
+
+.subscribe-quantity:hover button{
+    color: black;
+}
+
+.subscribe-quantity:hover p{
+    color: black;
+}
+
+.subscribe-quantity button{
+    padding:15px 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-to-cart{
+    width: 100%;
+}
+
+.product-add-buttons select{
+    height: 100%;
+    text-align: center;
+    background-color: white;
+    border-radius: 0px;
+    color: black;
+}
+
+.quantity-con button{
+    /* background-color: #47af19; */
+    color: white;
+}
+
+.quantity-con{
+    border: solid 1px white;
+}
+
+.quantity-con p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: #47af19; */
+    color: white;
+}
+
+.one-time-buttons{
+    grid-template-columns: 30% 70%;
+    grid-gap: 0px;
+    border: solid 1px #47af19;
+}
+
+.one-time-buttons div{
+    height: 100%;
+}
+
+.one-time-quantity{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:  #47af19;
+}
+
+.one-time-quantity p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
+}
+
+.one-time-quantity button{
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.one-time-buttons:hover p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
+}
+
+.one-time-add-to-cart{
+    height: 100%;
+    background-color:  #47af19;
+}
+
+.one-time-add-to-cart button{
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.one-time-buttons:hover{
+    background-color: transparent;
+    color: black;
+    border: solid 1px black;
+}
+
+.one-time-buttons:hover .one-time-add-to-cart button{
+    background-color: white;
+    color: black;
+    border-left: solid 1px black;
+}
+
+.one-time-buttons:hover .one-time-quantity button{
+    color: black;
+    background: white;
+}
+
+.one-time-buttons:hover .one-time-quantity{
+    background-color: white;
+}
+
+.one-time-buttons:hover .one-time-quantity p{
+    color: black;
+}
+
+.prepaid-buttons{
+    grid-template-columns: 50% 50%;
+    grid-gap: 0px;
+    
+}
+
+.prepaid-buttons select{
+    text-align: center;
+}
+
+.prepaid-quantity{
+    display: flex;
+    justify-content: space-between;
+}
+
+.prepaid-quantity-con{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    background-color:  #47af19;
+    border: solid 1px #47af19;
+}
+
+.prepaid-quantity-con:hover{
+    background-color: transparent;
+    border: solid 1px black;
+}
+
+.prepaid-quantity-con:hover .prepaid-quantity{
+    border-right: solid 1px black;
+}
+
+.prepaid-quantity-con:hover button{
+    color: black;
+}
+
+.prepaid-quantity-con:hover p{
+    color: black;
+}
+
+.prepaid-quantity-con button{
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.prepaid-quantity-con p{
+    color: white;
+}
+
+.prepaid-add-to-cart button{
+    width: 100%;
+    height: 100%;
+}
