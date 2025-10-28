@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from "react";
+import React,{useState,useEffect} from "react";
 
 import '../../../assets/styles/parts/completeSlider.css'
 
@@ -19,9 +19,9 @@ function CompleteSlider(){
     const [CompleteSliderRight , SetCompleteSliderRight] = useState(0)
     const [ScreenWidth,setScreenWidth] = useState(window.innerWidth)
 
-    const [MaximumMeterAmount, SetMaximumMeterAmount] = useState();
-    const [MinimumMeterAmount, SetMinimumMeterAmount] = useState();
-    const [Operand,SetOperand] = useState();
+    const [MaximumMeterAmount, SetMaximumMeterAmount] = useState<number>(0);
+    const [MinimumMeterAmount, SetMinimumMeterAmount] = useState<number>(0);
+    const [Operand,SetOperand] = useState<number>();
     
     const [CompleteLeftArrowColor, SetCompleteLeftArrowColor] = useState('#afafaf');
     const [CompleteRightArrowColor, SetCompleteRightArrowColor] = useState('#221f20');
@@ -85,15 +85,19 @@ function CompleteSlider(){
 
         const pressedButtonClass = event.target.className;  
 
-        console.log(document.querySelector('.complete-slider-block').style.width)
+        // console.log(document.querySelector('.complete-slider-block').style.width)
 
             if (pressedButtonClass === "slide-left" && navLineWidth > MinimumMeterAmount) {
                 setNavLineWidth(navLineWidth - MinimumMeterAmount);
-                SetCompleteSliderRight(CompleteSliderRight - Operand);
+                if(Operand != undefined){
+                    SetCompleteSliderRight(CompleteSliderRight - Operand);
+                }
                 SetSliderClicks((prev)=> prev-1)
             } else if (pressedButtonClass === "slide-right" && navLineWidth < MaximumMeterAmount) {
                 setNavLineWidth((prev) => prev + MinimumMeterAmount); 
-                SetCompleteSliderRight((prev) => prev + Operand);
+                if(Operand != undefined){
+                    SetCompleteSliderRight((prev) => prev + Operand);
+                }
                 SetSliderClicks((prev)=> prev+1)
             }  
             

@@ -1,4 +1,5 @@
-import {react} from 'react'
+import React from "react";
+
 import '../../../assets/styles/footer/footer.css'
 
 import soylentLogo from '../../../assets/images/footer/soylent-logo.jpeg'

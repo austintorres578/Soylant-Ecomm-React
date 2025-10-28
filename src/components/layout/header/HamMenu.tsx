@@ -14,17 +14,19 @@ import giveDrop from '../../../assets/images/Header/give-about.png';
 function HamMenu(){
 
 
-    const toggleHam = (event) =>{
+    const toggleHam = (event:  React.MouseEvent<HTMLElement>) =>{
 
-        let clickedHam = event.target;
+        let clickedHam = event.target as HTMLElement;
+        let hamDropTitle = clickedHam.querySelector('.ham-drop-title') as HTMLElement
+        let hamDropSymbol = hamDropTitle.children[1] as HTMLElement
 
         if(clickedHam.style.height==="78.5px"){
             clickedHam.style.height="100%"
-            clickedHam.querySelector('.ham-drop-title').children[1].innerText='-'
+            hamDropSymbol.innerText='-'
         }
         else if(clickedHam.style.height==="100%"){
             clickedHam.style.height="78.5px"
-            clickedHam.querySelector('.ham-drop-title').children[1].innerText='+'
+            hamDropSymbol.innerText='+'
         }
     
     }

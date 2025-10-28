@@ -1,4 +1,4 @@
-import {React, use, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 
 import '../../../assets/styles/parts/allProductItems.css';
 
@@ -14,97 +14,115 @@ import mintDrinkAlt from '../../../assets/images/products/mintDrinkAlt.webp';
 import halfStar from '../../../assets/images/Header/Half_Star.png'
 import fullStar from '../../../assets/images/Header/Full_Star.png'
 
-const changePurchaseMethod = (event) => {
-    let clickedValue = event.target.value;
-    let productItem = event.target.closest('.product-item'); // Restrict to the current product
+// If these are real <input type="radio"> elements:
+const changePurchaseMethod = (event: React.MouseEvent<HTMLInputElement>) => {
+  const target = event.currentTarget; // safe, never null in React
+  const clickedValue = target.value as 'subscribe' | 'one-time' | 'prepaid';
 
-    let allProductButtons = productItem.querySelectorAll('.product-add-buttons'); // Only within this product
-    let allProductRadios = productItem.querySelectorAll('.product-radio'); // Only within this product
+  const productItem = target.closest<HTMLElement>('.product-item');
+  if (!productItem) return;
 
-    let revealedButtons;
+  const revealedButtonsMap: Record<typeof clickedValue, string> = {
+    subscribe: 'subscription-buttons',
+    'one-time': 'one-time-buttons',
+    prepaid: 'prepaid-buttons',
+  };
+  const revealedButtons = revealedButtonsMap[clickedValue];
 
-    if (clickedValue === "subscribe") {
-        revealedButtons = "subscription-buttons";
-    } else if (clickedValue === "one-time") {
-        revealedButtons = "one-time-buttons";
-    } else if (clickedValue === "prepaid") {
-        revealedButtons = "prepaid-buttons";
-    }
+  // Only search inside this product
+  const allProductButtons = productItem.querySelectorAll<HTMLElement>('.product-add-buttons');
+  allProductButtons.forEach((button) => {
+    button.style.display = button.classList.contains(revealedButtons) ? 'grid' : 'none';
+  });
 
-    // Hide all buttons within this specific product item
-    allProductButtons.forEach(button => {
-        if (button.classList.contains(revealedButtons)) {
-            button.style.display = "grid";
-        } else {
-            button.style.display = "none";
-        }
-    });
-
-    // Update radio button styles within this product item
-    allProductRadios.forEach(radio => {
-        if (radio.value === clickedValue) {
-            radio.classList.remove("unchecked");
-            radio.classList.add("checked");
-        } else {
-            radio.classList.remove("checked");
-            radio.classList.add("unchecked");
-        }
-    });
+  const allProductRadios = productItem.querySelectorAll<HTMLInputElement>('.product-radio');
+  allProductRadios.forEach((radio) => {
+    const isMatch = radio.value === clickedValue;
+    radio.classList.toggle('checked', isMatch);
+    radio.classList.toggle('unchecked', !isMatch);
+  });
 };
 
 
-const addItemToCart = (event) => {
-    let product = event.target.closest('.product-item'); // Ensures we select the correct product
-    let productTitle = product.querySelector('.product-title').innerText;
-    let productPaymentType = product.querySelector('.checked').value;
-    let productImg = product.querySelector('.product-img')
+type PurchaseType = 'subscribe' | 'one-time' | 'prepaid';
 
-    console.log(productTitle)
-
-    let quantity;
-    let productPrice;
-
-    if (productPaymentType === "subscribe") {
-        quantity = Number(product.querySelector('.quantity-con').children[1].innerText);
-        productPrice = product.querySelector('.subscribe-price').innerText;
-    } else if (productPaymentType === "one-time") {
-        quantity = Number(product.querySelector('.one-time-quantity').children[1].innerText);
-        productPrice = product.querySelector('.one-time-price').innerText;
-    } else if (productPaymentType === "prepaid") {
-        quantity = Number(product.querySelector('.prepaid-quantity').children[1].innerText);
-        productPrice = product.querySelector('.prepaid-price').innerText;
-    }
-
-    let cart = JSON.parse(localStorage.getItem('AustinSoylentCart')) || [];
-    
-    let newItem = { title: productTitle, price: productPrice, purchaseType: productPaymentType, quantity: quantity, image:productImg.src };
-
-    let found = false;
-
-    for (let index = 0; index < cart.length; index++) {
-        console.log(index);
-
-        if (cart[index].title === newItem.title && cart[index].purchaseType === newItem.purchaseType) {
-            cart[index].quantity += newItem.quantity; // Update quantity
-            found = true;
-            break; // Exit loop once found to avoid redundant checks
-        }
-    }
-
-    // Only push if item was NOT found
-    if (!found) {
-        cart.push(newItem);
-    }
-
-    // Update localStorage once
-    localStorage.setItem('AustinSoylentCart', JSON.stringify(cart));
-
-    for (let a = 0; a < document.querySelectorAll('.cart-count').length; a++) {
-        document.querySelectorAll('.cart-count')[a].innerText=cart.length;
-        
-    }
-
+type CartItem = {
+  title: string;
+  price: string;
+  purchaseType: PurchaseType;
+  quantity: number;
+  image: string;
 };
+
+export const addItemToCart: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+  const btn = event.currentTarget; // safer than event.target
+  const product = btn.closest<HTMLElement>('.product-item');
+  if (!product) return;
+
+  const titleEl = product.querySelector<HTMLElement>('.product-title');
+  const productTitle = titleEl?.innerText.trim() ?? '';
+
+  // assuming `.checked` is a radio/input that holds the selected purchase type
+  const checkedInput = product.querySelector<HTMLInputElement>('.checked');
+  const productPaymentType = (checkedInput?.value ?? '') as PurchaseType;
+
+  const imgEl = product.querySelector<HTMLImageElement>('.product-img');
+  const productImgSrc = imgEl?.src ?? '';
+
+  let quantity = 0;
+  let productPrice = '';
+
+  switch (productPaymentType) {
+    case 'subscribe': {
+      const qtyEl = product.querySelector<HTMLElement>('.quantity-con')?.children[1] as HTMLElement | undefined;
+      quantity = qtyEl ? Number(qtyEl.innerText) || 0 : 0;
+      productPrice = product.querySelector<HTMLElement>('.subscribe-price')?.innerText ?? '';
+      break;
+    }
+    case 'one-time': {
+      const qtyEl = product.querySelector<HTMLElement>('.one-time-quantity')?.children[1] as HTMLElement | undefined;
+      quantity = qtyEl ? Number(qtyEl.innerText) || 0 : 0;
+      productPrice = product.querySelector<HTMLElement>('.one-time-price')?.innerText ?? '';
+      break;
+    }
+    case 'prepaid': {
+      const qtyEl = product.querySelector<HTMLElement>('.prepaid-quantity')?.children[1] as HTMLElement | undefined;
+      quantity = qtyEl ? Number(qtyEl.innerText) || 0 : 0;
+      productPrice = product.querySelector<HTMLElement>('.prepaid-price')?.innerText ?? '';
+      break;
+    }
+    default:
+      // unknown payment type; bail safely
+      return;
+  }
+
+  const raw = localStorage.getItem('AustinSoylentCart');
+  const cart: CartItem[] = raw ? JSON.parse(raw) : [];
+
+  const existing = cart.find(
+    (i) => i.title === productTitle && i.purchaseType === productPaymentType
+  );
+
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({
+      title: productTitle,
+      price: productPrice,
+      purchaseType: productPaymentType,
+      quantity,
+      image: productImgSrc,
+    });
+  }
+
+  localStorage.setItem('AustinSoylentCart', JSON.stringify(cart));
+
+  // Update all cart counters
+  document.querySelectorAll<HTMLElement>('.cart-count').forEach((el) => {
+    el.innerText = String(cart.length);
+  });
+};
+
 
 
 
@@ -212,7 +230,7 @@ function AllProductItems() {
                                     <button onClick={() =>{setSubscribeQuantityCount(subscribeQuantityCount+1)}}>+</button>
                                 </div>
                                 <div>
-                                    <button className='add-to-cart' onClick={(event)=>addItemToCart(event)}>Add to Cart</button>
+                                    <button className='add-to-cart' onClick={(event:React.MouseEvent<HTMLButtonElement>)=>addItemToCart(event)}>Add to Cart</button>
                                 </div>
                             </div>
                         </div>

@@ -6,26 +6,31 @@ import rightChevron from '../../../assets/images/parts/faq/rightChevron.png';
 
 function Faq(){
 
-    function revealAccordian(event){
+    // Tip: "Accordion" is the usual spelling, but keeping your name.
+    const revealAccordian: React.MouseEventHandler<HTMLDivElement> = (event) => {
+    const questionCon = event.currentTarget; // HTMLDivElement
 
-        console.log(event.target)
+    // Narrow the elements with generics + null guards
+    const answer = questionCon.querySelector<HTMLElement>('.faq-answer');
+    const content = answer?.children[0] as HTMLElement | undefined;
+    const btn = questionCon.querySelector<HTMLButtonElement>('button');
 
-        let questionCon = event.target;
+    if (!answer || !content || !btn) return;
 
-        if(questionCon.querySelector('.faq-answer').children[0].style.lineHeight==="0%"){
-            questionCon.querySelector('.faq-answer').children[0].style.lineHeight="145%";
-            questionCon.querySelector('.faq-answer').children[0].style.opacity=1;
-            questionCon.querySelector('button').style.transform="rotate(270deg)"
-        }else if(questionCon.querySelector('.faq-answer').children[0].style.lineHeight="145%"){
-            questionCon.querySelector('.faq-answer').children[0].style.lineHeight="0%";
-            questionCon.querySelector('.faq-answer').children[0].style.opacity=0;
-            questionCon.querySelector('button').style.transform="rotate(90deg)";
+    // NOTE: .style.* reads inline styles only; if none are set yet, it's "".
+    const isOpen = content.style.lineHeight === '145%';
 
-        }
-        
-
-        
+    if (isOpen) {
+        content.style.lineHeight = '0%';
+        content.style.opacity = '0';
+        btn.style.transform = 'rotate(90deg)';
+    } else {
+        content.style.lineHeight = '145%';
+        content.style.opacity = '1';
+        btn.style.transform = 'rotate(270deg)';
     }
+    };
+
 
 
     return(

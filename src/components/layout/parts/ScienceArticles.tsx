@@ -1,4 +1,5 @@
-import {react,useState,useEffect} from 'react'
+import React, { useEffect, useState, useRef } from "react";
+
 
 import '../../../assets/styles/parts/scienceArticles.css';
 
@@ -30,14 +31,15 @@ function ScienceArticles(){
           }
       }, []);
 
-    const moveSlider = (event) =>{
+    const moveSlider = (event:React.MouseEvent<HTMLElement>) =>{
+        const target = event.target as HTMLElement;
         
-            if(event.target.className==='right' && currentClick < MaxClicks){
+            if(target.className==='right' && currentClick < MaxClicks){
                 SetCurrentClick((prev)=> prev + 1)
                 SetArticlePosition((prev) => prev - SliderOperand)
                 SetMeterPosition((prev)=> prev+22.2)
             }
-            else if(event.target.className==='left' && currentClick !== 0){
+            else if(target.className==='left' && currentClick !== 0){
                 SetCurrentClick((prev)=> prev - 1)
                 SetArticlePosition((prev) => prev + SliderOperand)
                 SetMeterPosition((prev)=>prev-22.2)

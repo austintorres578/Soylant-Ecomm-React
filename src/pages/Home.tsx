@@ -1,4 +1,4 @@
-import {React,useState} from "react";
+import React, { useState } from "react";
 
 import '../assets/styles/pages/home.css';
 
@@ -19,8 +19,6 @@ import scienceBasedImg from '../assets/images/home/home-hero/science-based.svg';
 import affordabilityImg from '../assets/images/home/home-hero/affordability.svg';
 
 import ColorColumn from '../components/layout/parts/ColorColumn';
-
-import customerReviewImg from '../assets/images/home/home-hero/complete-protein-powder-bundle-chocolate-vanilla_x280.webp'
 import CustomerReviews from "../components/layout/parts/CustomerReviews";
 import IngredientsChart from "../components/layout/parts/IngredientsChart";
 import MediaCoverageRow from "../components/layout/parts/MediaCoverageRow";

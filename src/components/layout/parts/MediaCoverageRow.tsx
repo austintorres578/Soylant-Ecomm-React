@@ -1,4 +1,5 @@
-import {React,useState,useEffect} from "react";
+import React, { useEffect, useState, useRef } from "react";
+
 
 import smartlessLogo from '../../../assets/images/parts/mediaCoverageRow/smartless-logo.webp';
 import newYorkTimesLogo from '../../../assets/images/parts/mediaCoverageRow/new-york-times-logo.webp';
@@ -25,10 +26,10 @@ function MediaCoverageRow(){
     const [MeterPositionOperand,SetMeterPositionOperand] = useState(16)
 
     useEffect(() => {
-        if(window.innerWidth<1125&window.innerWidth>875){
+        if(window.innerWidth<1125 && window.innerWidth>875){
             SetAllowedClicks(6)
             SetMeterPositionOperand(13.3)
-        }else if(window.innerWidth<875&window.innerWidth>555){
+        }else if(window.innerWidth<875 && window.innerWidth>555){
             SetAllowedClicks(7)
             SetMeterPositionOperand(11.42857)
         }
@@ -38,12 +39,15 @@ function MediaCoverageRow(){
         }
       }, []);
 
-    const moveMediaSlider = (event) => {
-        if(event.target.className==="left" && CurrentClick!==0){
+    const moveMediaSlider = (event:React.MouseEvent<HTMLButtonElement>) => {
+
+        let target = event.target as HTMLElement | null
+
+        if(target && target.className==="left" && CurrentClick!==0){
             SetMediaCoveragePos((prev) => prev + Operand)
             SetCurrentClick((prev)=>prev - 1)
             SetMeterPosition((prev)=>prev-MeterPositionOperand)
-        }else if(event.target.className==="right" && CurrentClick<AllowedClicks){
+        }else if(target && target.className==="right" && CurrentClick<AllowedClicks){
             SetMediaCoveragePos((prev) => prev - Operand)
             SetCurrentClick((prev)=>prev + 1)
             SetMeterPosition((prev)=>prev+MeterPositionOperand)
@@ -91,8 +95,8 @@ function MediaCoverageRow(){
                     </div>
                 </div>
                 <div className="media-coverage-buttons-con">
-                    <button onClick={(event) => moveMediaSlider(event)} className="left"><img src={blackArrow}></img></button>
-                    <button onClick={(event) => moveMediaSlider(event)} className="right"><img src={blackArrow}></img></button>
+                    <button onClick={(event:React.MouseEvent<HTMLButtonElement>) => moveMediaSlider(event)} className="left"><img src={blackArrow}></img></button>
+                    <button onClick={(event:React.MouseEvent<HTMLButtonElement>) => moveMediaSlider(event)} className="right"><img src={blackArrow}></img></button>
                 </div>
                 
             </div>

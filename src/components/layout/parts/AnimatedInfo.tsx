@@ -1,4 +1,5 @@
-import { React, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+
 import "../../../assets/styles/parts/animatedInfo.css";
 
 import soylentLogo from '../../../assets/images/parts/animatedSetion/soylent-logo.webp';
@@ -28,56 +29,58 @@ function AnimatedInfo() {
             if (animationToggleRef.current) {
                 SetAnimationToggle(false);
     
-                const coloredRow = document.querySelector('.colored-row');
-                const animatedContent = document.querySelector('.animated-info-content');
+                const coloredRow = document.querySelector('.colored-row') as HTMLElement;
+                const coloredRowChildren = coloredRow.children as HTMLCollectionOf<HTMLElement>
+                const animatedContent = document.querySelector('.animated-info-content') as HTMLElement;
+                const animatedContentChildren = animatedContent.children as HTMLCollectionOf<HTMLElement>
     
                 if (!coloredRow || !animatedContent) return; // Ensure elements exist before proceeding
     
-                animatedContent.children[0].style.opacity = 1;
-                animatedContent.children[0].classList.add("scale-up");
+                animatedContentChildren[0].style.opacity = "1";
+                animatedContentChildren[0].classList.add("scale-up");
     
                 // Animation logic with safety checks
-                const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+                const delay = (ms:number) => new Promise((resolve) => setTimeout(resolve, ms));
     
                 await delay(2500);
                 if (!animatedContent.children[0]) return; // Prevent running if the component is unmounted
-                animatedContent.children[0].style.opacity = 0;
+                animatedContentChildren[0].style.opacity = '0';
     
                 await delay(1000);
                 if (!coloredRow.children.length) return;
-                for (const child of coloredRow.children) {
+                for (const child of Array.from(coloredRow.children)) {
                     child.style.top = "85%";
                 }
     
                 await delay(500);
                 SetAnimatedText("We are made of the perfect");
-                animatedContent.children[0].style.opacity = 1;
+                animatedContentChildren[0].style.opacity = '1';
     
                 animatedContent.children[0].classList.add("scale-up");
     
                 await delay(1750);
                 if (!animatedContent.children[0]) return;
-                animatedContent.children[0].classList.remove("scale-up");
-                animatedContent.children[0].style.opacity = 0;
+                animatedContentChildren[0].classList.remove("scale-up");
+                animatedContentChildren[0].style.opacity = '1';
     
                 await delay(1000);
                 SetAnimatedText("Synergy of Ingredients");
-                animatedContent.children[0].style.opacity = 1;
-                animatedContent.children[0].classList.add("scale-up");
+                animatedContentChildren[0].style.opacity = '1';
+                animatedContentChildren[0].classList.add("scale-up");
     
                 await delay(1750);
                 if (!animatedContent.children[0]) return;
                 animatedContent.children[0].classList.remove("scale-up");
-                animatedContent.children[0].style.opacity = 0;
+                animatedContentChildren[0].style.opacity = '1';
     
                 await delay(1000);
                 SetAnimatedText("protein + slow carb burning + vitamins + healthy fats");
-                animatedContent.children[0].classList.add("scale-up");
-                animatedContent.children[0].style.opacity = 1;
+                animatedContentChildren[0].classList.add("scale-up");
+                animatedContentChildren[0].style.opacity = '1';
     
                 await delay(1750);
                 if (!animatedContent.children[0]) return;
-                animatedContent.children[0].style.opacity = 0;
+                animatedContentChildren[0].style.opacity = '1';
     
                 await delay(1000);
                 if (!coloredRow.children.length) return;
@@ -87,8 +90,8 @@ function AnimatedInfo() {
     
                 await delay(500);
                 SetAnimatedText("Science Backed Nutrition");
-                animatedContent.children[0].classList.add("scale-up");
-                animatedContent.children[0].style.opacity = 1;
+                animatedContentChildren[0].classList.add("scale-up");
+                animatedContentChildren[0].style.opacity = '1';
     
                 await delay(2500);
                 const newSpeeds = [0.5, 0.7, 0.9, 1.1, 1.4];
@@ -97,11 +100,11 @@ function AnimatedInfo() {
                     coloredRow.children[i].style.transition = `${newSpeeds[i]}s`;
                 }
     
-                animatedContent.children[0].style.opacity = 0;
+                animatedContentChildren[0].style.opacity = '1';
     
                 for (let i = 0; i < coloredRow.children.length; i++) {
                     if (!coloredRow.children[i] || !coloredRow.children[i].children[0]) return;
-                    coloredRow.children[i].style.top = "-55%";
+                    coloredRowChildren[i].style.top = "-55%";
                     coloredRow.children[i].children[0].style.opacity = "1";
                 }
     
@@ -118,14 +121,14 @@ function AnimatedInfo() {
                 }
     
                 if (!animatedContent.children[0]) return;
-                animatedContent.children[0].classList.remove("scale-up");
-                animatedContent.children[0].style.opacity = 0;
+                animatedContentChildren[0].classList.remove("scale-up");
+                animatedContentChildren[0].style.opacity = '1';
     
                 await delay(1000);
-                const animatedCTA = document.querySelector('.animated-content-cta');
+                const animatedCTA = document.querySelector('.animated-content-cta') as HTMLElement;
                 if (!animatedCTA) return;
-                animatedCTA.style.opacity = 1;
-                animatedCTA.style.zIndex = 10;
+                animatedCTA.style.opacity = '1';
+                animatedCTA.style.zIndex = '10';
     
                 
             } else {

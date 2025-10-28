@@ -13,7 +13,7 @@ const suggestedProducts = [
 ];
 
 
-function extractPrice(priceString) {
+function extractPrice(priceString:String) {
     if (!priceString) return 0;
     
     const priceMatch = priceString.match(/[\d,.]+/);
@@ -54,6 +54,7 @@ function Cart() {
 
     // Function to load cart items from localStorage
     const loadCartFromStorage = () => {
+
         const storedCart = localStorage.getItem('AustinSoylentCart');
         const parsedCart = storedCart ? JSON.parse(storedCart) : [];
 
@@ -130,7 +131,9 @@ function Cart() {
     const closeCart = () => {
         let cartWrapper = document.querySelector('.cart-wrapper');
         let yourCart = document.querySelector('.your-cart');
-        let body = document.querySelector('body');
+        let body = document.body;
+
+        if(!cartWrapper || !yourCart || !body === null) return
 
         cartWrapper.style.opacity = 0;
         cartWrapper.style.pointerEvents = "none";

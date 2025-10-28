@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../../../assets/styles/header/Header.css';
@@ -22,7 +22,7 @@ import HalfStar from '../../../assets/images/Header/Half_Star.png';
 import FullStar from '../../../assets/images/Header/Full_Star.png';
 
 function Header() {
-    const [CurrentDropDown, SetCurrentDropdown] = useState(null);
+    const [CurrentDropDown, SetCurrentDropdown] = React.useState<React.ReactNode>(null);
     const [cartCount, setCartCount] = useState(0);
 
     const [ButtonSliderText, SetButtonSliderText] = useState(
@@ -39,7 +39,7 @@ function Header() {
         updateCartCount(); // Initial load
 
         // Listen for localStorage changes (from other tabs)
-        const handleStorageChange = (event) => {
+        const handleStorageChange = (event:StorageEvent) => {
             if (event.key === 'AustinSoylentCart') {
                 updateCartCount();
             }
@@ -56,11 +56,11 @@ function Header() {
     }, []);
 
     const revealCart = () => {
-        let cartWrapper = document.querySelector('.cart-wrapper');
-        let yourCart = document.querySelector('.your-cart');
-        let body = document.querySelector('body');
+        let cartWrapper = document.querySelector('.cart-wrapper') as HTMLDivElement;
+        let yourCart = document.querySelector('.your-cart') as HTMLDivElement;
+        let body = document.querySelector('body') as HTMLBodyElement;
 
-        cartWrapper.style.opacity = 1;
+        cartWrapper.style.opacity = '1';
         cartWrapper.style.pointerEvents = "all";
         yourCart.style.right = "0px";
 
@@ -69,15 +69,16 @@ function Header() {
         body.style.overscrollBehavior = 'none'; // Stops scroll chaining
     };
 
-    const moveNavDropdown = (event, direction) => {
-        let navDrop = document.querySelector('.nav-dropdown-con');
-        let navLinkText;
+    const moveNavDropdown = ( event: React.PointerEvent<HTMLElement>,direction: string) => {
+        let navDrop = document.querySelector('.nav-dropdown-con') as HTMLDivElement;
+        let navLinkText: string | undefined;
 
         if (direction === 'up' && navDrop) {
             navDrop.style.top = "-500%";
         } else if (direction === 'down' && navDrop) {
             navDrop.style.top = "100%";
-            navLinkText = event.target.innerText;
+            const target = event.target as HTMLElement; // 👈 cast target
+            navLinkText = target.innerText;             // ✅ works now
         }
 
         if (navLinkText === "SHOP") {

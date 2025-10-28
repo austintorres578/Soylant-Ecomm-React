@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import '../../../assets/styles/header/MobileHeader.css';
 
 import mobileHeaderLogo from '../../../assets/images/Header/soylent logo.jpeg';
@@ -12,16 +12,26 @@ function MobileHeader() {
     const [mobileCartCountText, setMobileCartCountText] = useState(0);
 
     // Function to update the cart count
-    const updateCartCount = () => {
-        const cart = JSON.parse(localStorage.getItem('AustinSoylentCart')) || [];
-        setMobileCartCountText(cart.length);
+    type CartItem = {
+    title: string;
+    price: string;
+    purchaseType: string;
+    quantity: number;
+    image: string;
     };
+
+const updateCartCount = () => {
+  const storedCart = localStorage.getItem('AustinSoylentCart');
+  const cart: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
+  setMobileCartCountText(cart.length);
+};
+
 
     useEffect(() => {
         updateCartCount(); // Initial load
 
         // Listen for localStorage changes (from other tabs)
-        const handleStorageChange = (event) => {
+        const handleStorageChange = (event:StorageEvent) => {
             if (event.key === 'AustinSoylentCart') {
                 updateCartCount();
             }
@@ -38,37 +48,48 @@ function MobileHeader() {
     }, []);
 
     const revealCart = () => {
-        let cartWrapper = document.querySelector('.cart-wrapper');
-        let yourCart = document.querySelector('.your-cart');
+        let cartWrapper = document.querySelector('.cart-wrapper') as HTMLElement | null;
+        let yourCart = document.querySelector('.your-cart') as HTMLElement | null;
         let body = document.querySelector('body');
 
-        cartWrapper.style.opacity = 1;
-        cartWrapper.style.pointerEvents = "all";
-        yourCart.style.right = "0px";
+        if(cartWrapper){
+            cartWrapper.style.opacity = '1';
+            cartWrapper.style.pointerEvents = "all";
+        }
 
-        body.style.overflow = 'hidden'; // Disables scrolling
-        body.style.touchAction = 'none'; // Prevents touch gestures from triggering scroll
-        body.style.overscrollBehavior = 'none'; // Stops scroll chaining
+        if(yourCart){
+            yourCart.style.right = "0px";
+        }
+
+        if(body){
+            body.style.overflow = 'hidden'; // Disables scrolling
+            body.style.touchAction = 'none'; // Prevents touch gestures from triggering scroll
+            body.style.overscrollBehavior = 'none'; // Stops scroll chaining
+        }
     };
 
     const toggleHamMenu = () => {
-        let hamMenu = document.querySelector('.ham-menu');
+        let hamMenu = document.querySelector('.ham-menu') as HTMLDivElement;
         let hamIconVar;
+        let page = document.querySelector('.page-con') as HTMLDivElement;
+        let footer = document.querySelector('footer') as HTMLElement;
+        let header = document.querySelector('header') as HTMLElement;
+
 
         if (hamMenu.style.display === "none") {
             hamMenu.style.display = "block";
             hamIconVar = xIcon;
             SetHamIconImg(hamIconVar);
-            document.querySelector('.page-con').style.display = 'none';
-            document.querySelector('footer').style.display = 'none';
-            document.querySelector('header').style.position = "relative";
+            page.style.display = 'none';
+            footer.style.display = 'none';
+            header.style.position = "relative";
         } else if (hamMenu.style.display === "block") {
             hamMenu.style.display = "none";
             hamIconVar = mobileHamIcon;
             SetHamIconImg(hamIconVar);
-            document.querySelector('.page-con').style.display = 'block';
-            document.querySelector('footer').style.display = 'block';
-            document.querySelector('header').style.position = "fixed";
+            page.style.display = 'block';
+            footer.style.display = 'block';
+            header.style.position = "fixed";
         }
     };
 

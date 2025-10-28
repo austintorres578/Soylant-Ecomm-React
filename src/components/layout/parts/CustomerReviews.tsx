@@ -1,4 +1,5 @@
-import {react,useState,useEffect} from 'react'
+import React, { useEffect, useState, useRef } from "react";
+
 
 import '../../../assets/styles/parts/customerReviews.css'
 
@@ -39,7 +40,7 @@ function CustomerReviews(){
         
     }, []);
 
-    const moveSlider = (direction) => {
+    const moveSlider = (direction:String) => {
         let customerReviewBlocks = document.querySelector('.customer-review-blocks');
         let newCustomerReviewDirectionValue;
         let slideDistance;
