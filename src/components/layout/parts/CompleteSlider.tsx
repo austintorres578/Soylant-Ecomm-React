@@ -81,9 +81,10 @@ function CompleteSlider(){
 
       }, []);
     
-    function moveSlideByPress(event){
+    function moveSlideByPress(event:React.MouseEvent<HTMLButtonElement | HTMLDivElement>){
 
-        const pressedButtonClass = event.target.className;  
+        const target = event.target as HTMLElement;
+        const pressedButtonClass = target.className;
 
         // console.log(document.querySelector('.complete-slider-block').style.width)
 

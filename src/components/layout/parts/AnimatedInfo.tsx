@@ -30,7 +30,7 @@ function AnimatedInfo() {
                 SetAnimationToggle(false);
     
                 const coloredRow = document.querySelector('.colored-row') as HTMLElement;
-                const coloredRowChildren = coloredRow.children as HTMLCollectionOf<HTMLElement>
+                const coloredRowChildren = coloredRow.children as HTMLCollectionOf<HTMLDivElement>
                 const animatedContent = document.querySelector('.animated-info-content') as HTMLElement;
                 const animatedContentChildren = animatedContent.children as HTMLCollectionOf<HTMLElement>
     

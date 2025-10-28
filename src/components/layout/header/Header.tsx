@@ -21,6 +21,8 @@ import AmericanFlag from '../../../assets/images/Header/american-flag.jpeg';
 import HalfStar from '../../../assets/images/Header/Half_Star.png';
 import FullStar from '../../../assets/images/Header/Full_Star.png';
 
+import { CartItem } from '@/types/customTypes';
+
 function Header() {
     const [CurrentDropDown, SetCurrentDropdown] = React.useState<React.ReactNode>(null);
     const [cartCount, setCartCount] = useState(0);
@@ -31,9 +33,10 @@ function Header() {
 
     // Function to update cart count
     const updateCartCount = () => {
-        const cart = JSON.parse(localStorage.getItem('AustinSoylentCart')) || [];
-        setCartCount(cart.length);
+        const cart = JSON.parse(localStorage.getItem('AustinSoylentCart') || '[]') as CartItem[];
+    setCartCount(cart.length);
     };
+
 
     useEffect(() => {
         updateCartCount(); // Initial load

@@ -6,6 +6,8 @@ import strawberryProduct from '../../../assets/images/parts/animatedSetion/Straw
 import originalProduct from '../../../assets/images/parts/animatedSetion/Vanilla.webp';
 import brownProduct from '../../../assets/images/parts/animatedSetion/Chocolate_1017e0e6-3409-49ef-9eb8-342a34864a92.webp';
 
+import { CartItem } from "@/types/customTypes";
+
 const suggestedProducts = [
     { title: "Soylent complete meal - Vanilla", price: "$48.00", image: originalProduct },
     { title: "Soylent complete meal - Banana", price: "$48.00", image: bananaProduct },
@@ -21,15 +23,16 @@ function extractPrice(priceString:String) {
 }
 
 function Cart() {
-    const [CartItems, SetCartItems] = useState([]);
-    const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+    const [CartItems, SetCartItems] = useState<CartItem[]>([]);
+    const [filteredSuggestions, setFilteredSuggestions] = useState<CartItem[]>([]);
     const [CheckoutArray, SetCheckoutArray] = useState([]);
 
-    function checkout(event) {
+    function checkout(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
     
         // Retrieve cart data from localStorage
-        const checkoutArray = JSON.parse(localStorage.getItem('AustinSoylentCart')) || [];
+        const cart = JSON.parse(localStorage.getItem('AustinSoylentCart') || '[]') as CartItem[];
+
     
         // Send cart data to backend
         fetch("https://ecomm-server-dhv0.onrender.com/create-checkout-session", {
@@ -37,7 +40,7 @@ function Cart() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ cart: checkoutArray }), // ✅ Send cart with title & purchaseType
+            body: JSON.stringify({ cart: CheckoutArray }), // ✅ Send cart with title & purchaseType
         })
         .then(response => response.json())
         .then(data => {
@@ -68,7 +71,7 @@ function Cart() {
     };
 
     // Function to remove an item from cart
-    const removeItem = (index) => {
+    const removeItem = (index:number) => {
         let updatedCart = [...CartItems];
         updatedCart.splice(index, 1);
 
@@ -78,10 +81,10 @@ function Cart() {
     };
 
     // Function to update item quantity
-    const updateQuantity = (index, newQuantity) => {
+    const updateQuantity = (index:number, newQuantity:number) => {
         if (newQuantity < 1) return;
 
-        let updatedCart = [...CartItems];
+        let updatedCart:CartItem[] = [...CartItems];
         updatedCart[index].quantity = newQuantity;
 
         localStorage.setItem('AustinSoylentCart', JSON.stringify(updatedCart));
@@ -107,7 +110,7 @@ function Cart() {
     useEffect(() => {
         loadCartFromStorage();
 
-        const handleStorageChange = (event) => {
+        const handleStorageChange = (event:StorageEvent) => {
             if (event.key === 'AustinSoylentCart') {
                 loadCartFromStorage();
             }
@@ -146,7 +149,7 @@ function Cart() {
 
 
     
-    function displayCartItems(CartItems, removeItem, updateQuantity) {
+    function displayCartItems(CartItems:CartItem[], removeItem, updateQuantity) {
         if (CartItems.length === 0) {
             return (
                 <div className="empty-cart-con">
@@ -180,9 +183,12 @@ function Cart() {
         ));
     }
 
-    const totalPrice = CartItems.reduce((total, item) => {
+    const totalPrice = Number(
+    CartItems.reduce((total: number, item:CartItem) => {
         return total + extractPrice(item.price) * (item.quantity || 1);
-    }, 0).toFixed(2);
+    }, 0).toFixed(2)
+    );
+
 
     const cartFreeShipping = () => {
 
@@ -216,7 +222,7 @@ function Cart() {
                     {filteredSuggestions.length > 0 && (
                         <div className="cart-suggestions">
                             <p className="cart-suggestion-title">You May Also Like</p>
-                            {filteredSuggestions.slice(0, 3).map((product, i) => (
+                            {filteredSuggestions.slice(0, 3).map((product:CartItem, i) => (
                                 <a href="#" className="suggested-product" key={i}>
                                     <div>
                                         <img src={product.image} alt="Product"></img>
