@@ -50,6 +50,7 @@ Developed using **React** on the frontend and a secure **Express.js backend** to
   <li>HTML</li>
   <li>CSS</li>
   <li>JavaScript</li>
+  <li>Typescript</li>
   <li>React</li>
   <li>Express.js</li>
   <li>Stripe API (Checkout)</li>
