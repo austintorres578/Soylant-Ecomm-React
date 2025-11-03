@@ -1,4 +1,5 @@
-import React,{useState, useEffect } from "react";
+import React,{useState, useEffect} from "react";
+import { Link } from 'react-router-dom';
 import '../../../assets/styles/parts/cart.css';
 
 import bananaProduct from '../../../assets/images/parts/animatedSetion/Banana.webp';
@@ -6,7 +7,7 @@ import strawberryProduct from '../../../assets/images/parts/animatedSetion/Straw
 import originalProduct from '../../../assets/images/parts/animatedSetion/Vanilla.webp';
 import brownProduct from '../../../assets/images/parts/animatedSetion/Chocolate_1017e0e6-3409-49ef-9eb8-342a34864a92.webp';
 
-import { CartItem } from "@/types/customTypes";
+import { CartItem, SuggestedProduct } from "@/types/customTypes";
 
 const suggestedProducts = [
     { title: "Soylent complete meal - Vanilla", price: "$48.00", image: originalProduct },
@@ -29,35 +30,36 @@ function extractPrice(price: string | number): number {
 
 function Cart() {
     const [CartItems, SetCartItems] = useState<CartItem[]>([]);
-    const [filteredSuggestions, setFilteredSuggestions] = useState<CartItem[]>([]);
-    const [CheckoutArray, SetCheckoutArray] = useState([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState<SuggestedProduct[]>([]);
 
-    function checkout(event:React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-    
-        // Retrieve cart data from localStorage
-        const cart = JSON.parse(localStorage.getItem('AustinSoylentCart') || '[]') as CartItem[];
+  function checkout(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    
-        // Send cart data to backend
-        fetch("https://ecomm-server-dhv0.onrender.com/create-checkout-session", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ cart: CheckoutArray }), // ✅ Send cart with title & purchaseType
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.url) {
-                console.log("Redirecting to:", data.url);
-                window.location.href = data.url; // ✅ Redirect to Stripe checkout
-            } else {
-                console.error("No checkout URL received.");
-            }
-        })
-        .catch(error => console.error("Error:", error));
-    }
+    // Retrieve cart data from localStorage (same as original JS)
+    const checkoutArray = JSON.parse(
+      localStorage.getItem('AustinSoylentCart') || '[]'
+    ) as CartItem[];
+
+    console.log('Sending cart to backend:', checkoutArray);
+
+    fetch("https://ecomm-server-dhv0.onrender.com/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart: checkoutArray }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.url) {
+          console.log("Redirecting to:", data.url);
+          window.location.href = data.url;
+        } else {
+          console.error("No checkout URL received.", data);
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  }
     
 
     // Function to load cart items from localStorage
@@ -185,7 +187,7 @@ function Cart() {
         <div className="empty-cart-con">
             <h2>Your cart is empty!</h2>
             <a href="#">
-            <button onClick={closeCart}>Shop Now</button>
+            <Link to="/products"><button onClick={closeCart}>Shop Now</button></Link>
             </a>
         </div>
         );
@@ -263,7 +265,7 @@ function Cart() {
                     {filteredSuggestions.length > 0 && (
                         <div className="cart-suggestions">
                             <p className="cart-suggestion-title">You May Also Like</p>
-                            {filteredSuggestions.slice(0, 3).map((product:CartItem, i) => (
+                            {filteredSuggestions.slice(0, 3).map((product:SuggestedProduct, i) => (
                                 <a href="#" className="suggested-product" key={i}>
                                     <div>
                                         <img src={product.image} alt="Product"></img>

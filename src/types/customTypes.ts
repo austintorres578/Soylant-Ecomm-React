@@ -7,3 +7,9 @@ export type CartItem = {
   purchaseType: PurchaseType;
   image: string;
 };
+
+export type SuggestedProduct = {
+  title: string;
+  price: string;
+  image: string;
+};
