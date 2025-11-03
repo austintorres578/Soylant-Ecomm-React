@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React,{useState, useEffect } from "react";
 import '../../../assets/styles/parts/cart.css';
 
 import bananaProduct from '../../../assets/images/parts/animatedSetion/Banana.webp';
@@ -15,12 +15,17 @@ const suggestedProducts = [
 ];
 
 
-function extractPrice(priceString:String) {
-    if (!priceString) return 0;
-    
-    const priceMatch = priceString.match(/[\d,.]+/);
-    return priceMatch ? parseFloat(priceMatch[0].replace(/,/g, '')) : 0;
+function extractPrice(price: string | number): number {
+  if (typeof price === "number") return price;
+
+  // If it's nullish or empty
+  if (!price) return 0;
+
+  // At this point TypeScript knows price is a string
+  const priceMatch = price.match(/[\d,.]+/);
+  return priceMatch ? parseFloat(priceMatch[0].replace(/,/g, "")) : 0;
 }
+
 
 function Cart() {
     const [CartItems, SetCartItems] = useState<CartItem[]>([]);
@@ -56,19 +61,23 @@ function Cart() {
     
 
     // Function to load cart items from localStorage
-    const loadCartFromStorage = () => {
+  const loadCartFromStorage = (): void => {
+    const storedCart = localStorage.getItem('AustinSoylentCart');
 
-        const storedCart = localStorage.getItem('AustinSoylentCart');
-        const parsedCart = storedCart ? JSON.parse(storedCart) : [];
+    // Explicitly tell TS what type we're expecting
+    const parsedCart: CartItem[] = storedCart ? JSON.parse(storedCart) : [];
 
-        SetCartItems(parsedCart);
-        
-        // Filter out products that are already in the cart
-        const cartItemTitles = new Set(parsedCart.map(item => item.title));
-        const newSuggestions = suggestedProducts.filter(product => !cartItemTitles.has(product.title));
-        
-        setFilteredSuggestions(newSuggestions);
-    };
+    SetCartItems(parsedCart);
+
+    // Filter out products that are already in the cart
+    const cartItemTitles = new Set(parsedCart.map((item) => item.title));
+
+    const newSuggestions = suggestedProducts.filter(
+        (product) => !cartItemTitles.has(product.title)
+    );
+
+    setFilteredSuggestions(newSuggestions);
+   };
 
     // Function to remove an item from cart
     const removeItem = (index:number) => {
@@ -92,19 +101,29 @@ function Cart() {
     };
 
     // Function to add suggested product to cart
-    const addToCart = (title, price, image) => {
-        let updatedCart = [...CartItems];
+    const addToCart = (title: string, price: string | number, image: string): void => {
+  // clone current cart
+    const updatedCart: CartItem[] = [...CartItems];
 
-        let existingItem = updatedCart.find(item => item.title === title);
+    // check for existing item
+    const existingItem = updatedCart.find(item => item.title === title);
+
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
-            updatedCart.push({ title, price, image, quantity: 1, purchaseType: "one-time" });
+            updatedCart.push({
+            title,
+            price,
+            image,
+            quantity: 1,
+            purchaseType: "one-time",
+            });
         }
 
+        // persist and refresh state
         localStorage.setItem('AustinSoylentCart', JSON.stringify(updatedCart));
         SetCartItems(updatedCart);
-        loadCartFromStorage(); // Refresh suggested products
+        loadCartFromStorage(); // refresh suggested products
     };
 
     useEffect(() => {
@@ -131,16 +150,19 @@ function Cart() {
         return () => clearInterval(interval);
     }, []);
 
-    const closeCart = () => {
-        let cartWrapper = document.querySelector('.cart-wrapper');
-        let yourCart = document.querySelector('.your-cart');
-        let body = document.body;
+   const closeCart = () => {
+        // Narrow the types to HTMLElement
+        const cartWrapper = document.querySelector<HTMLElement>('.cart-wrapper');
+        const yourCart = document.querySelector<HTMLElement>('.your-cart');
+        const body = document.body;
 
-        if(!cartWrapper || !yourCart || !body === null) return
+        // Fix logic: your previous `!body === null` was incorrect
+        if (!cartWrapper || !yourCart || !body) return;
 
-        cartWrapper.style.opacity = 0;
-        cartWrapper.style.pointerEvents = "none";
-        yourCart.style.right = "-1000px";
+        // Safe to use .style now
+        cartWrapper.style.opacity = '0';
+        cartWrapper.style.pointerEvents = 'none';
+        yourCart.style.right = '-1000px';
 
         body.style.overflow = '';
         body.style.touchAction = '';
@@ -148,39 +170,58 @@ function Cart() {
     };
 
 
-    
-    function displayCartItems(CartItems:CartItem[], removeItem, updateQuantity) {
-        if (CartItems.length === 0) {
-            return (
-                <div className="empty-cart-con">
-                    <h2>Your cart is empty!</h2>
-                    <a href="#">
-                        <button onClick={closeCart}>Shop Now</button>
-                    </a>
-                </div>
-            );
-        }
 
-        return CartItems.map((item, index) => (
-            <div className="cart-item" key={index}>
-                <div className="cart-item-image">
-                    <a href="#"><img src={item.image || brownProduct} alt="Product"></img></a>
-                    <button className="cart-remove" onClick={() => removeItem(index)}>X Remove</button>
-                </div>
-                <div>
-                    <p style={{ marginBottom: "5px" }}>{item.title || "Soylent complete meal - original"}</p>
-                    <p style={{ marginTop: "0px" }}><strong>{item.purchaseType || "one-time"}</strong></p>
-                    <div className="cart-buttons">
-                        <div className="cart-item-quantity">
-                            <p className="quantity-operand" onClick={() => updateQuantity(index, item.quantity - 1)}>-</p>
-                            <p>{item.quantity || 1}</p>
-                            <p className="quantity-operand" onClick={() => updateQuantity(index, item.quantity + 1)}>+</p>
-                        </div>
-                        <h3>{item.price || "$99.99"}</h3>
-                    </div>
-                </div>
+    
+    type RemoveItemFn = (index: number) => void;
+    type UpdateQuantityFn = (index: number, nextQty: number) => void;
+
+    function displayCartItems(
+    cartItems: CartItem[],
+    removeItem: RemoveItemFn,
+    updateQuantity: UpdateQuantityFn
+    ): React.ReactNode {
+    if (cartItems.length === 0) {
+        return (
+        <div className="empty-cart-con">
+            <h2>Your cart is empty!</h2>
+            <a href="#">
+            <button onClick={closeCart}>Shop Now</button>
+            </a>
+        </div>
+        );
+    }
+
+    return cartItems.map((item, index) => {
+        const qty = Math.max(1, item.quantity ?? 1);
+        return (
+        <div className="cart-item" key={index}>
+            <div className="cart-item-image">
+            <a href="#"><img src={item.image || brownProduct} alt="Product" /></a>
+            <button className="cart-remove" onClick={() => removeItem(index)}>X Remove</button>
             </div>
-        ));
+
+            <div>
+            <p style={{ marginBottom: "5px" }}>
+                {item.title || "Soylent complete meal - original"}
+            </p>
+            <p style={{ marginTop: "0px" }}>
+                <strong>{item.purchaseType || "one-time"}</strong>
+            </p>
+
+            <div className="cart-buttons">
+                <div className="cart-item-quantity">
+                <p className="quantity-operand" onClick={() => updateQuantity(index, Math.max(1, qty - 1))}>-</p>
+                <p>{qty}</p>
+                <p className="quantity-operand" onClick={() => updateQuantity(index, qty + 1)}>+</p>
+                </div>
+                <h3>
+                {typeof item.price === "number" ? `$${item.price.toFixed(2)}` : (item.price || "$99.99")}
+                </h3>
+            </div>
+            </div>
+        </div>
+        );
+    });
     }
 
     const totalPrice = Number(

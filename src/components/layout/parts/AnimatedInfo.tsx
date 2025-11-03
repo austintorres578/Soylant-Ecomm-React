@@ -21,144 +21,151 @@ function AnimatedInfo() {
     }, [AnimationToggle]); // Update the ref whenever AnimationToggle changes
 
     useEffect(() => {
-        const container = document.querySelector('.animated-info-con');
-    
-        const animateChildren = async () => {
-            if (!container) return; // Prevent running if the container is not found
-    
-            if (animationToggleRef.current) {
-                SetAnimationToggle(false);
-    
-                const coloredRow = document.querySelector('.colored-row') as HTMLElement;
-                const coloredRowChildren = coloredRow.children as HTMLCollectionOf<HTMLDivElement>
-                const animatedContent = document.querySelector('.animated-info-content') as HTMLElement;
-                const animatedContentChildren = animatedContent.children as HTMLCollectionOf<HTMLElement>
-    
-                if (!coloredRow || !animatedContent) return; // Ensure elements exist before proceeding
-    
-                animatedContentChildren[0].style.opacity = "1";
-                animatedContentChildren[0].classList.add("scale-up");
-    
-                // Animation logic with safety checks
-                const delay = (ms:number) => new Promise((resolve) => setTimeout(resolve, ms));
-    
-                await delay(2500);
-                if (!animatedContent.children[0]) return; // Prevent running if the component is unmounted
-                animatedContentChildren[0].style.opacity = '0';
-    
-                await delay(1000);
-                if (!coloredRow.children.length) return;
-                for (const child of Array.from(coloredRow.children)) {
-                    child.style.top = "85%";
-                }
-    
-                await delay(500);
-                SetAnimatedText("We are made of the perfect");
-                animatedContentChildren[0].style.opacity = '1';
-    
-                animatedContent.children[0].classList.add("scale-up");
-    
-                await delay(1750);
-                if (!animatedContent.children[0]) return;
-                animatedContentChildren[0].classList.remove("scale-up");
-                animatedContentChildren[0].style.opacity = '1';
-    
-                await delay(1000);
-                SetAnimatedText("Synergy of Ingredients");
-                animatedContentChildren[0].style.opacity = '1';
-                animatedContentChildren[0].classList.add("scale-up");
-    
-                await delay(1750);
-                if (!animatedContent.children[0]) return;
-                animatedContent.children[0].classList.remove("scale-up");
-                animatedContentChildren[0].style.opacity = '1';
-    
-                await delay(1000);
-                SetAnimatedText("protein + slow carb burning + vitamins + healthy fats");
-                animatedContentChildren[0].classList.add("scale-up");
-                animatedContentChildren[0].style.opacity = '1';
-    
-                await delay(1750);
-                if (!animatedContent.children[0]) return;
-                animatedContentChildren[0].style.opacity = '1';
-    
-                await delay(1000);
-                if (!coloredRow.children.length) return;
-                for (const child of coloredRow.children) {
-                    child.style.top = "-85%";
-                }
-    
-                await delay(500);
-                SetAnimatedText("Science Backed Nutrition");
-                animatedContentChildren[0].classList.add("scale-up");
-                animatedContentChildren[0].style.opacity = '1';
-    
-                await delay(2500);
-                const newSpeeds = [0.5, 0.7, 0.9, 1.1, 1.4];
-                for (let i = 0; i < coloredRow.children.length; i++) {
-                    if (!coloredRow.children[i]) return;
-                    coloredRow.children[i].style.transition = `${newSpeeds[i]}s`;
-                }
-    
-                animatedContentChildren[0].style.opacity = '1';
-    
-                for (let i = 0; i < coloredRow.children.length; i++) {
-                    if (!coloredRow.children[i] || !coloredRow.children[i].children[0]) return;
-                    coloredRowChildren[i].style.top = "-55%";
-                    coloredRow.children[i].children[0].style.opacity = "1";
-                }
-    
-                await delay(2500);
-                const resetSpeeds = [1, 1.25, 1.5, 1.75, 2];
-                for (let i = 0; i < coloredRow.children.length; i++) {
-                    if (!coloredRow.children[i]) return;
-                    coloredRow.children[i].style.transition = `${resetSpeeds[i]}s`;
-                }
-    
-                for (const child of coloredRow.children) {
-                    if (!child) return;
-                    child.style.top = "300%";
-                }
-    
-                if (!animatedContent.children[0]) return;
-                animatedContentChildren[0].classList.remove("scale-up");
-                animatedContentChildren[0].style.opacity = '1';
-    
-                await delay(1000);
-                const animatedCTA = document.querySelector('.animated-content-cta') as HTMLElement;
-                if (!animatedCTA) return;
-                animatedCTA.style.opacity = '1';
-                animatedCTA.style.zIndex = '10';
-    
-                
-            } else {
-                console.log("Animation is already running.");
-            }
-        };
-    
-        if (container) {
-            container.addEventListener('click', animateChildren);
-        }
-    
-        return () => {
-            if (container) {
-                container.removeEventListener('click', animateChildren);
-            }
-        };
-    }, []); // Empty dependency array ensures this effect runs only once on mount
-    
+  const container = document.querySelector<HTMLDivElement>('.animated-info-con');
+
+  const delay = (ms: number) => new Promise<void>(res => setTimeout(res, ms));
+
+  const animateChildren = async () => {
+    if (!container) return;
+
+    if (animationToggleRef.current) {
+      SetAnimationToggle(false);
+
+      // Narrow with generics so we get HTMLElement, not Element
+      const coloredRow = document.querySelector<HTMLElement>('.colored-row');
+      const animatedContent = document.querySelector<HTMLElement>('.animated-info-content');
+
+      if (!coloredRow || !animatedContent) return;
+
+      // Turn live HTMLCollections into arrays of HTMLElements
+      const coloredRowChildren = Array.from(coloredRow.children) as HTMLElement[];
+      const animatedContentChildren = Array.from(animatedContent.children) as HTMLElement[];
+
+      const firstAnimated = animatedContentChildren[0];
+      if (!firstAnimated) return;
+
+      firstAnimated.style.opacity = '1';
+      firstAnimated.classList.add('scale-up');
+
+      await delay(2500);
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].style.opacity = '0';
+
+      await delay(1000);
+      if (!coloredRowChildren.length) return;
+      for (const child of coloredRowChildren) {
+        child.style.top = '85%';
+      }
+
+      await delay(500);
+      SetAnimatedText('We are made of the perfect');
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].style.opacity = '1';
+      animatedContentChildren[0].classList.add('scale-up');
+
+      await delay(1750);
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].classList.remove('scale-up');
+      animatedContentChildren[0].style.opacity = '1';
+
+      await delay(1000);
+      SetAnimatedText('Synergy of Ingredients');
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].style.opacity = '1';
+      animatedContentChildren[0].classList.add('scale-up');
+
+      await delay(1750);
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].classList.remove('scale-up');
+      animatedContentChildren[0].style.opacity = '1';
+
+      await delay(1000);
+      SetAnimatedText('protein + slow carb burning + vitamins + healthy fats');
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].classList.add('scale-up');
+      animatedContentChildren[0].style.opacity = '1';
+
+      await delay(1750);
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].style.opacity = '1';
+
+      await delay(1000);
+      if (!coloredRowChildren.length) return;
+      for (const child of coloredRowChildren) {
+        child.style.top = '-85%';
+      }
+
+      await delay(500);
+      SetAnimatedText('Science Backed Nutrition');
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].classList.add('scale-up');
+      animatedContentChildren[0].style.opacity = '1';
+
+      await delay(2500);
+      const newSpeeds = [0.5, 0.7, 0.9, 1.1, 1.4];
+      for (let i = 0; i < coloredRowChildren.length; i++) {
+        const child = coloredRowChildren[i];
+        if (!child) return;
+        child.style.transition = `${newSpeeds[i] ?? 1}s`;
+      }
+
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].style.opacity = '1';
+
+      for (let i = 0; i < coloredRowChildren.length; i++) {
+        const rowChild = coloredRowChildren[i];
+        if (!rowChild) return;
+
+        rowChild.style.top = '-55%';
+
+        // Safely narrow the nested first child to HTMLElement before using style
+        const inner = rowChild.children[0] as HTMLElement | undefined;
+        if (inner) inner.style.opacity = '1';
+      }
+
+      await delay(2500);
+      const resetSpeeds = [1, 1.25, 1.5, 1.75, 2];
+      for (let i = 0; i < coloredRowChildren.length; i++) {
+        const child = coloredRowChildren[i];
+        if (!child) return;
+        child.style.transition = `${resetSpeeds[i] ?? 1}s`;
+      }
+
+      for (const child of coloredRowChildren) {
+        child.style.top = '300%';
+      }
+
+      if (!animatedContentChildren[0]) return;
+      animatedContentChildren[0].classList.remove('scale-up');
+      animatedContentChildren[0].style.opacity = '1';
+
+      await delay(1000);
+      const animatedCTA = document.querySelector<HTMLElement>('.animated-content-cta');
+      if (!animatedCTA) return;
+      animatedCTA.style.opacity = '1';
+      animatedCTA.style.zIndex = '10';
+    } else {
+      console.log('Animation is already running.');
+    }
+  };
+
+  container?.addEventListener('click', animateChildren);
+  return () => container?.removeEventListener('click', animateChildren);
+}, []);
+
 
     useEffect(() => {
         // Set up the IntersectionObserver
         const target = document.querySelector('.animated-info-con');
 
-        const handleIntersect = (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    target.click(); // Trigger click on the element
-                }
-            });
-        };
+     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+            const target = entry.target; // This is an Element
+            if (entry.isIntersecting && target instanceof HTMLElement) {
+            target.click(); // Safe: HTMLElement has .click()
+            }
+        });
+     };
 
         const observer = new IntersectionObserver(handleIntersect, {
             root: null, // Default to viewport
