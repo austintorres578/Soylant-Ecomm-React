@@ -12,6 +12,7 @@ Developed using **React** on the frontend and a secure **Express.js backend** to
 <ul>
   <li>Built with React and Express.js</li>
   <li>Custom product pages and cart logic</li>
+  <li>Converted JS Files to Typescript TSX<li>
   <li>Integrated with Stripe Checkout (test mode)</li>
   <li>Responsive layout inspired by Soylent’s design system</li>
   <li>Focus on smooth UX with animations and transitions</li>
